@@ -1,0 +1,3 @@
+key.projectId,key.userId,key.sourceId,value.time,value.timeReceived,value.steps
+Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.574773736258E9,1.574773736258E9,7
+Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.574773843481E9,1.574773843481E9,7

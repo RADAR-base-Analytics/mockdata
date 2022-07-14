@@ -1,0 +1,3 @@
+key.projectId,key.userId,key.sourceId,value.time,value.timeReceived,value.steps
+STAGING_PROJECT,072ddb22-82ef-4b81-8460-41ab096b54bb,fbbed041-f570-4c6c-8a7f-a866ac11fec0,1.572074590107E9,1.572074590107E9,7
+STAGING_PROJECT,072ddb22-82ef-4b81-8460-41ab096b54bb,fbbed041-f570-4c6c-8a7f-a866ac11fec0,1.572074590526E9,1.572074590526E9,1

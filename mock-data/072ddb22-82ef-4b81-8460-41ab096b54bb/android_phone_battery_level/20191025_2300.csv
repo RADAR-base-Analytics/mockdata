@@ -1,0 +1,2 @@
+key.projectId,key.userId,key.sourceId,value.time,value.timeReceived,value.batteryLevel,value.isPlugged,value.status
+STAGING_PROJECT,072ddb22-82ef-4b81-8460-41ab096b54bb,fc184ba0-677f-4aae-a4ea-b2b8c7530b18,1.572044425706E9,1.572044425706E9,0.01,false,DISCHARGING
