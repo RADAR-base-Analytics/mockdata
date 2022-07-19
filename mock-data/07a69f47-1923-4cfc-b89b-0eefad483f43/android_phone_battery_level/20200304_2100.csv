@@ -1,6 +1,0 @@
-key.projectId,key.userId,key.sourceId,value.time,value.timeReceived,value.batteryLevel,value.isPlugged,value.status
-Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.583356115407E9,1.583356115407E9,0.14,false,DISCHARGING
-Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.583356667686E9,1.583356667686E9,0.13,false,DISCHARGING
-Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.583357653405E9,1.583357653405E9,0.12,false,DISCHARGING
-Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.583357867682E9,1.583357867682E9,0.12,false,DISCHARGING
-Radar-test ,07a69f47-1923-4cfc-b89b-0eefad483f43,b9b1fe39-4ed0-45eb-ab0e-9591d49c0e9e,1.583358467686E9,1.583358467686E9,0.11,false,DISCHARGING

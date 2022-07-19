@@ -1,2 +1,0 @@
-key.projectId,key.userId,key.sourceId,value.time,value.timeReceived,value.batteryLevel,value.isPlugged,value.status
-Radar-test ,5c0e2ec7-6f85-4041-9669-7145075d1754,9f0cb48e-b010-4c78-8f2c-660e22d2e603,1.540505594206E9,1.540505594206E9,0.53,false,DISCHARGING
