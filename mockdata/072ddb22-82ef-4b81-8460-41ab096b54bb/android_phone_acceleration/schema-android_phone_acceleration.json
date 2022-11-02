@@ -1,0 +1,69 @@
+{
+  "type" : "record",
+  "name" : "PhoneAcceleration",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.passive.phone",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneAcceleration",
+      "namespace" : "org.radarcns.passive.phone",
+      "doc" : "Data from 3-axis accelerometer sensor with gravitational constant g as unit.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "x",
+        "type" : "float",
+        "doc" : "Acceleration in the x-axis (g)."
+      }, {
+        "name" : "y",
+        "type" : "float",
+        "doc" : "Acceleration in the y-axis (g)."
+      }, {
+        "name" : "z",
+        "type" : "float",
+        "doc" : "Acceleration in the z-axis (g)."
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

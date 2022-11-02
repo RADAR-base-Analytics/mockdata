@@ -1,0 +1,102 @@
+{
+  "type" : "record",
+  "name" : "PhoneRelativeLocation",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.passive.phone",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneRelativeLocation",
+      "namespace" : "org.radarcns.passive.phone",
+      "doc" : "Data from the gps and network location providers. The latitude and longitude are optionally offset with an unspecified reference location and can thus be treated as relative locations. In that case, a location cannot be used to infer absolute location. This means accurate distances or angles between locations cannot be calculated since those depend on the absolute location. The reference location has a random longitude and a latitude that deviates at most 4 degrees in each direction to the initial location.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "offsetReference",
+        "type" : [ "null", "int" ],
+        "doc" : "Arbitrary reference to the offset. As long as the offset remains equal, so does this reference. If this reference is 0, no offset is used and the contained latitude and longitude can be considered absolute. If this is null, the location is relative to an offset but the offset is unknown: it may vary between different measurements with null reference. Offset references cannot be compared between users.",
+        "default" : null
+      }, {
+        "name" : "provider",
+        "type" : {
+          "type" : "enum",
+          "name" : "LocationProvider",
+          "doc" : "Type of provider of location data.",
+          "symbols" : [ "GPS", "NETWORK", "OTHER", "UNKNOWN" ]
+        },
+        "doc" : "Android provider of the location data.",
+        "default" : "UNKNOWN"
+      }, {
+        "name" : "latitude",
+        "type" : [ "null", "double" ],
+        "doc" : "Relative latitude from an initial random reference latitude (degrees with range [-90, 90]).",
+        "default" : null
+      }, {
+        "name" : "longitude",
+        "type" : [ "null", "double" ],
+        "doc" : "Relative longitude from an initial reference longitude (degrees with range [-180, 180]).",
+        "default" : null
+      }, {
+        "name" : "altitude",
+        "type" : [ "null", "float" ],
+        "doc" : "Height above the WGS 84 reference ellipsoid (m).",
+        "default" : null
+      }, {
+        "name" : "accuracy",
+        "type" : [ "null", "float" ],
+        "doc" : "The estimated horizontal accuracy of this location, radial (m). We define horizontal accuracy as the radius of 68% confidence. In other words, if you draw a circle centered at this location's latitude and longitude, and with a radius equal to the accuracy, then there is a 68% probability that the true location is inside the circle.",
+        "default" : null
+      }, {
+        "name" : "speed",
+        "type" : [ "null", "float" ],
+        "doc" : "Speed over ground (m/s).",
+        "default" : null
+      }, {
+        "name" : "bearing",
+        "type" : [ "null", "float" ],
+        "doc" : "The horizontal direction of travel of this device (degrees with range (0, 360]).",
+        "default" : null
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

@@ -1,0 +1,71 @@
+{
+  "type" : "record",
+  "name" : "OpenSmile2PhoneAudio",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.passive.opensmile",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "OpenSmile2PhoneAudio",
+      "namespace" : "org.radarcns.passive.opensmile",
+      "doc" : "Audio data collected by a phone audio input and processed using openSMILE 2.x.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device time since the Unix Epoch at start of recording (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device time since the Unix Epoch when recording is processed (s)."
+      }, {
+        "name" : "config",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "OpenSMILE configuration file."
+      }, {
+        "name" : "data",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Audio features computed by openSMILE recorded in Base64 format."
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

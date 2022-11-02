@@ -1,0 +1,71 @@
+{
+  "type" : "record",
+  "name" : "PhoneContactList",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.passive.phone",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneContactList",
+      "namespace" : "org.radarcns.passive.phone",
+      "doc" : "Data describing the number of contacts in the the list of contacts and its change since the previous check.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "contactsAdded",
+        "type" : [ "null", "int" ],
+        "doc" : "Number of new contacts added to the list of contacts since the previous measurement that was sent. The value is null if this is the first measurement or if the previous measurement is unknown to the sender.",
+        "default" : null
+      }, {
+        "name" : "contactsRemoved",
+        "type" : [ "null", "int" ],
+        "doc" : "Number of new contacts removed from the list of contacts since the previous measurement that was sent. The value is null if this is the first measurement or if the previous measurement is unknown to the sender.",
+        "default" : null
+      }, {
+        "name" : "contacts",
+        "type" : "int",
+        "doc" : "Current number of contacts in the list of contacts."
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

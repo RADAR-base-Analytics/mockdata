@@ -1,0 +1,132 @@
+{
+  "type" : "record",
+  "name" : "PhoneUsageAggregate",
+  "namespace" : "org.radarcns.kafka.AggregateKey_org.radarcns.stream.aggregator",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "AggregateKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an aggregated stream. The stream will work with time windows.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "connect.doc" : "Project that the key belongs to.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project that the key belongs to.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "connect.doc" : "User Identifier created during the enrolment.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "connect.doc" : "Unique identifier associated with the source.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      }, {
+        "name" : "timeStart",
+        "type" : {
+          "type" : "double",
+          "connect.doc" : "Time (seconds since the UNIX Epoch) of the time window start."
+        },
+        "doc" : "Time (seconds since the UNIX Epoch) of the time window start."
+      }, {
+        "name" : "timeEnd",
+        "type" : {
+          "type" : "double",
+          "connect.doc" : "Time (seconds since the UNIX Epoch) of the time window end."
+        },
+        "doc" : "Time (seconds since the UNIX Epoch) of the time window end."
+      } ],
+      "connect.doc" : "Key of an aggregated stream. The stream will work with time windows.",
+      "connect.version" : 1,
+      "connect.parameters" : {
+        "connect.record.doc" : "Key of an aggregated stream. The stream will work with time windows."
+      },
+      "connect.name" : "org.radarcns.kafka.AggregateKey"
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneUsageAggregate",
+      "namespace" : "org.radarcns.stream.aggregator",
+      "doc" : "Aggregate time and opening events for an app.",
+      "fields" : [ {
+        "name" : "packageName",
+        "type" : {
+          "type" : "string",
+          "connect.doc" : "Package name of the app in use.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        },
+        "doc" : "Package name of the app in use."
+      }, {
+        "name" : "durationInForeground",
+        "type" : {
+          "type" : "double",
+          "connect.doc" : "Total time in milliseconds the app was in the foreground."
+        },
+        "doc" : "Total time in milliseconds the app was in the foreground."
+      }, {
+        "name" : "timesOpen",
+        "type" : {
+          "type" : "int",
+          "connect.doc" : "Total amount of times given app was opened in given time-frame."
+        },
+        "doc" : "Total amount of times given app was opened in given time-frame."
+      }, {
+        "name" : "categoryName",
+        "type" : [ "null", {
+          "type" : "string",
+          "connect.doc" : "App category as given by the play store, null if a category is not listed or unable to be fetched.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "App category as given by the play store, null if a category is not listed or unable to be fetched.",
+        "default" : null
+      }, {
+        "name" : "categoryNameFetchTime",
+        "type" : [ "null", {
+          "type" : "double",
+          "connect.doc" : "Timestamp in UTC when the category was attempted to fetch from the play store (s), null if not fetched."
+        } ],
+        "doc" : "Timestamp in UTC when the category was attempted to fetch from the play store (s), null if not fetched.",
+        "default" : null
+      } ],
+      "connect.doc" : "Aggregate time and opening events for an app.",
+      "connect.version" : 1,
+      "connect.parameters" : {
+        "connect.record.doc" : "Aggregate time and opening events for an app."
+      },
+      "connect.name" : "org.radarcns.stream.aggregator.PhoneUsageAggregate"
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

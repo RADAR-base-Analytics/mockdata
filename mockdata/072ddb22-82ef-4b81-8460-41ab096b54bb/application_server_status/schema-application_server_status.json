@@ -1,0 +1,71 @@
+{
+  "type" : "record",
+  "name" : "ApplicationServerStatus",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.monitor.application",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "ApplicationServerStatus",
+      "namespace" : "org.radarcns.monitor.application",
+      "doc" : "Server connection status with android client.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "serverStatus",
+        "type" : {
+          "type" : "enum",
+          "name" : "ServerStatus",
+          "doc" : "Server connection status.",
+          "symbols" : [ "CONNECTED", "DISCONNECTED", "UNKNOWN" ]
+        },
+        "doc" : "Application server connection status.",
+        "default" : "UNKNOWN"
+      }, {
+        "name" : "ipAddress",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Hardware identifier of client application.",
+        "default" : null
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}
