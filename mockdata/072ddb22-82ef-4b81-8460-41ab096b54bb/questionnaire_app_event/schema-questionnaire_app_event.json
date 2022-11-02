@@ -1,0 +1,71 @@
+{
+  "type" : "record",
+  "name" : "QuestionnaireApplicationInteractionEvent",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.monitor.questionnaire",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "QuestionnaireApplicationInteractionEvent",
+      "namespace" : "org.radarcns.monitor.questionnaire",
+      "doc" : "Schema of reporting events for user interaction with the questionnaire application. This describes significant user interactions, such as response to notifications and starting or completing questionnaires.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "eventType",
+        "type" : {
+          "type" : "enum",
+          "name" : "InteractionEventType",
+          "doc" : "NOTIFICATION_OPEN = When a user presses the notification to open the app, APP_OPEN = When a user opens the app directly, QUESTIONNAIRE_STARTED = When a user starts a questionnaire, QUESTIONNAIRE_FINISHED = When a user completes a questionnaire, QUESTIONNAIRE_CANCELLED = When a user closes a questionnaire without completing it.",
+          "symbols" : [ "NOTIFICATION_OPEN", "APP_OPEN", "QUESTIONNAIRE_STARTED", "QUESTIONNAIRE_FINISHED", "QUESTIONNAIRE_CANCELLED", "OTHER", "UNKNOWN" ]
+        },
+        "doc" : "Questionnaire app activity usage event type.",
+        "default" : "UNKNOWN"
+      }, {
+        "name" : "questionnaireName",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Name of the questionnaire.",
+        "default" : null
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

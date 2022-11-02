@@ -1,0 +1,87 @@
+{
+  "type" : "record",
+  "name" : "PhoneUsageEvent",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.passive.phone",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneUsageEvent",
+      "namespace" : "org.radarcns.passive.phone",
+      "doc" : "Event for closing or opening an app.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : "double",
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "packageName",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Package name of the launched app."
+      }, {
+        "name" : "categoryName",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "App category as given by the play store, null if a category is not listed or unable to be fetched.",
+        "default" : null
+      }, {
+        "name" : "categoryNameFetchTime",
+        "type" : [ "null", "double" ],
+        "doc" : "Timestamp in UTC when the category was attempted to fetch from the play store (s), null if not fetched.",
+        "default" : null
+      }, {
+        "name" : "eventType",
+        "type" : {
+          "type" : "enum",
+          "name" : "UsageEventType",
+          "doc" : "Android activity usage event type.",
+          "symbols" : [ "FOREGROUND", "BACKGROUND", "CONFIG", "SHORTCUT", "INTERACTION", "OTHER", "UNKNOWN" ]
+        },
+        "doc" : "Whether the event brought app to foreground or background or neither.",
+        "default" : "UNKNOWN"
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

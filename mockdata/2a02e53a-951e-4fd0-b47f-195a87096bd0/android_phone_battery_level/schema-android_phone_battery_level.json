@@ -1,0 +1,121 @@
+{
+  "type" : "record",
+  "name" : "PhoneBatteryLevel",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.passive.phone",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "connect.doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "connect.doc" : "User Identifier created during the enrolment.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "connect.doc" : "Unique identifier associated with the source.",
+          "connect.parameters" : {
+            "avro.java.string" : "String"
+          },
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ],
+      "connect.doc" : "Key of an observation.",
+      "connect.version" : 1,
+      "connect.parameters" : {
+        "connect.record.doc" : "Key of an observation."
+      },
+      "connect.name" : "org.radarcns.kafka.ObservationKey"
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneBatteryLevel",
+      "namespace" : "org.radarcns.passive.phone",
+      "doc" : "Phone battery level.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : {
+          "type" : "double",
+          "connect.doc" : "Device timestamp in UTC (s)."
+        },
+        "doc" : "Device timestamp in UTC (s)."
+      }, {
+        "name" : "timeReceived",
+        "type" : {
+          "type" : "double",
+          "connect.doc" : "Device receiver timestamp in UTC (s)."
+        },
+        "doc" : "Device receiver timestamp in UTC (s)."
+      }, {
+        "name" : "batteryLevel",
+        "type" : {
+          "type" : "float",
+          "connect.doc" : "Battery level from 0 to 1."
+        },
+        "doc" : "Battery level from 0 to 1."
+      }, {
+        "name" : "isPlugged",
+        "type" : {
+          "type" : "boolean",
+          "connect.doc" : "Whether the phone is connected to a power source."
+        },
+        "doc" : "Whether the phone is connected to a power source."
+      }, {
+        "name" : "status",
+        "type" : {
+          "type" : "string",
+          "connect.doc" : "Android battery states.",
+          "connect.parameters" : {
+            "connect.enum.doc" : "Android device battery states.",
+            "io.confluent.connect.avro.Enum" : "org.radarcns.passive.phone.BatteryStatus",
+            "io.confluent.connect.avro.Enum.CHARGING" : "CHARGING",
+            "io.confluent.connect.avro.Enum.DISCHARGING" : "DISCHARGING",
+            "io.confluent.connect.avro.Enum.NOT_CHARGING" : "NOT_CHARGING",
+            "io.confluent.connect.avro.Enum.FULL" : "FULL",
+            "io.confluent.connect.avro.Enum.UNKNOWN" : "UNKNOWN",
+            "connect.record.doc" : "Android device battery states."
+          },
+          "connect.default" : "UNKNOWN",
+          "connect.name" : "org.radarcns.passive.phone.BatteryStatus"
+        },
+        "doc" : "Android battery states.",
+        "default" : "UNKNOWN"
+      } ],
+      "connect.doc" : "Phone battery level.",
+      "connect.version" : 1,
+      "connect.parameters" : {
+        "connect.record.doc" : "Phone battery level."
+      },
+      "connect.name" : "org.radarcns.passive.phone.PhoneBatteryLevel"
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

@@ -1,0 +1,105 @@
+{
+  "type" : "record",
+  "name" : "ApplicationDeviceInfo",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.monitor.application",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "ApplicationDeviceInfo",
+      "namespace" : "org.radarcns.monitor.application",
+      "doc" : "Device information where the application is running.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Device timestamp as time since the Unix Epoch (s)."
+      }, {
+        "name" : "manufacturer",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Manufacturer of the device. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "model",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Model of the device. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "operatingSystem",
+        "type" : {
+          "type" : "enum",
+          "name" : "OperatingSystem",
+          "doc" : "Operating system types.",
+          "symbols" : [ "ANDROID", "IOS", "MACOS", "WINDOWS", "LINUX", "BSD", "OTHER", "UNKNOWN" ]
+        },
+        "doc" : "Operating system that the application is running on.",
+        "default" : "UNKNOWN"
+      }, {
+        "name" : "operatingSystemVersion",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Operating system version as readable string. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "operatingSystemVersionCode",
+        "type" : [ "null", "int" ],
+        "doc" : "Operating system unique version number. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "appVersion",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "App version as a readable string. Null if unknown.",
+        "default" : null
+      }, {
+        "name" : "appVersionCode",
+        "type" : [ "null", "int" ],
+        "doc" : "Unique app version number. Null if unknown.",
+        "default" : null
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

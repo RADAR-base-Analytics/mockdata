@@ -1,0 +1,85 @@
+{
+  "type" : "record",
+  "name" : "PhoneUsageAggregate",
+  "namespace" : "org.radarcns.kafka.AggregateKey_org.radarcns.stream.aggregator",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "AggregateKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an aggregated stream. The stream will work with time windows.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project that the key belongs to.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      }, {
+        "name" : "timeStart",
+        "type" : "double",
+        "doc" : "Time (seconds since the UNIX Epoch) of the time window start."
+      }, {
+        "name" : "timeEnd",
+        "type" : "double",
+        "doc" : "Time (seconds since the UNIX Epoch) of the time window end."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "PhoneUsageAggregate",
+      "namespace" : "org.radarcns.stream.aggregator",
+      "doc" : "Aggregate time and opening events for an app.",
+      "fields" : [ {
+        "name" : "packageName",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Package name of the app in use."
+      }, {
+        "name" : "durationInForeground",
+        "type" : "double",
+        "doc" : "Total time in milliseconds the app was in the foreground."
+      }, {
+        "name" : "timesOpen",
+        "type" : "int",
+        "doc" : "Total amount of times given app was opened in given time-frame."
+      }, {
+        "name" : "categoryName",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "App category as given by the play store, null if a category is not listed or unable to be fetched.",
+        "default" : null
+      }, {
+        "name" : "categoryNameFetchTime",
+        "type" : [ "null", "double" ],
+        "doc" : "Timestamp in UTC when the category was attempted to fetch from the play store (s), null if not fetched.",
+        "default" : null
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

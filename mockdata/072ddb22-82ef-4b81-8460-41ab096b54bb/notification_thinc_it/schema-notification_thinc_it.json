@@ -1,0 +1,106 @@
+{
+  "type" : "record",
+  "name" : "Notification",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.active.notification",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "Notification",
+      "namespace" : "org.radarcns.active.notification",
+      "doc" : "NOTE: THIS SCHEMA IS DEPRACATED. PLEASE USE org.radarcns.active.questionnaire.Questionnaire. General schema for notifications. Check the specification folder to see how the notification has been defined. For each NotificationType there is a JSON file reporting the questions set and possible answers if available.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Timestamp in UTC (s) when the notification is submitted to the subject."
+      }, {
+        "name" : "timeCompleted",
+        "type" : "double",
+        "doc" : "Timestamp in UTC (s) when subject marks the notification as complete."
+      }, {
+        "name" : "name",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Notifications names."
+      }, {
+        "name" : "version",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "It reports the notification version stated in the JSON specification."
+      }, {
+        "name" : "answers",
+        "type" : {
+          "type" : "array",
+          "items" : {
+            "type" : "record",
+            "name" : "Answer",
+            "doc" : "Notification answer.",
+            "fields" : [ {
+              "name" : "questionId",
+              "type" : [ "null", {
+                "type" : "string",
+                "avro.java.string" : "String"
+              } ],
+              "doc" : "Unique identifier for the specific question.",
+              "default" : null
+            }, {
+              "name" : "value",
+              "type" : [ "int", {
+                "type" : "string",
+                "avro.java.string" : "String"
+              }, "double" ],
+              "doc" : "Subject answer."
+            }, {
+              "name" : "startTime",
+              "type" : "double",
+              "doc" : "Timestamp in UTC (s) when the notification is shown."
+            }, {
+              "name" : "endTime",
+              "type" : "double",
+              "doc" : "Timestamp in UTC (s)  when the notification is answered."
+            } ]
+          }
+        },
+        "doc" : "Answers list. The answers order must follow the notification order."
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}

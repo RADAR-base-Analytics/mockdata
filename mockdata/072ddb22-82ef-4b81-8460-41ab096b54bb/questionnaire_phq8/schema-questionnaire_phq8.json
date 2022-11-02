@@ -1,0 +1,111 @@
+{
+  "type" : "record",
+  "name" : "Questionnaire",
+  "namespace" : "org.radarcns.kafka.ObservationKey_org.radarcns.active.questionnaire",
+  "doc" : "combined key-value record",
+  "fields" : [ {
+    "name" : "key",
+    "type" : {
+      "type" : "record",
+      "name" : "ObservationKey",
+      "namespace" : "org.radarcns.kafka",
+      "doc" : "Key of an observation.",
+      "fields" : [ {
+        "name" : "projectId",
+        "type" : [ "null", {
+          "type" : "string",
+          "avro.java.string" : "String"
+        } ],
+        "doc" : "Project identifier. Null if unknown or the user is not enrolled in a project.",
+        "default" : null
+      }, {
+        "name" : "userId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "User Identifier created during the enrolment."
+      }, {
+        "name" : "sourceId",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Unique identifier associated with the source."
+      } ]
+    },
+    "doc" : "Key of a Kafka SinkRecord"
+  }, {
+    "name" : "value",
+    "type" : {
+      "type" : "record",
+      "name" : "Questionnaire",
+      "namespace" : "org.radarcns.active.questionnaire",
+      "doc" : "General schema for questionnaire. Check the specification folder to see how the questionnaire has been defined. For each QuestionnaireType there is a JSON file reporting the questions set and possible answers if available.",
+      "fields" : [ {
+        "name" : "time",
+        "type" : "double",
+        "doc" : "Timestamp in UTC (s) when the questionnaire is started by the subject."
+      }, {
+        "name" : "timeCompleted",
+        "type" : "double",
+        "doc" : "Timestamp in UTC (s) when the questionnaire is completed by the subject."
+      }, {
+        "name" : "timeNotification",
+        "type" : [ "null", "double" ],
+        "doc" : "Timestamp in UTC (s) when the notification to complete the questionnaire is sent.",
+        "default" : null
+      }, {
+        "name" : "name",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "Questionnaire names."
+      }, {
+        "name" : "version",
+        "type" : {
+          "type" : "string",
+          "avro.java.string" : "String"
+        },
+        "doc" : "It reports the questionnaire version stated in the JSON specification."
+      }, {
+        "name" : "answers",
+        "type" : {
+          "type" : "array",
+          "items" : {
+            "type" : "record",
+            "name" : "Answer",
+            "doc" : "Questionnaire answer.",
+            "fields" : [ {
+              "name" : "questionId",
+              "type" : [ "null", {
+                "type" : "string",
+                "avro.java.string" : "String"
+              } ],
+              "doc" : "Unique identifier for the specific question.",
+              "default" : null
+            }, {
+              "name" : "value",
+              "type" : [ "int", {
+                "type" : "string",
+                "avro.java.string" : "String"
+              }, "double" ],
+              "doc" : "Subject answer."
+            }, {
+              "name" : "startTime",
+              "type" : "double",
+              "doc" : "Timestamp in UTC (s) when the question is shown."
+            }, {
+              "name" : "endTime",
+              "type" : "double",
+              "doc" : "Timestamp in UTC (s)  when the question is answered."
+            } ]
+          }
+        },
+        "doc" : "Answers list. The answers order must follow the questions order."
+      } ]
+    },
+    "doc" : "Value of a Kafka SinkRecord"
+  } ]
+}
